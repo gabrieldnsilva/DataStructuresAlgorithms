@@ -70,6 +70,46 @@ node *rightRotate(node *nodeUnbalanced) { //Solution to a) CASE
     return leftNode;
 }
 
+node *leftRotate(node *nodeUnbalanced) {
+    node *rightNode = nodeUnbalanced->right;
+    node *rightLeftNode = rightNode->left;
+
+    //1. Perform Rotation
+    rightNode->left = nodeUnbalanced;
+    nodeUnbalanced->right = rightNode->left;
+
+    //2. Return new root
+    return rightNode;
+}
+
+node *balanceAfterInsert(node * currentNode, int data, int balance) {
+
+    //Data inserted is greater than parent right node data, and right node height is more then 1
+    if (balance < -1 && data > currentNode->right->data)
+        return leftRotate(currentNode);
+
+    //Data inserted is less than parent left node data, and left node height is more than 1
+    if (balance > 1 && data < currentNode->left->data)
+        return rightRotate(currentNode);
+
+    //Data inserted is greater than parent left node data, and right node height is more than 1
+    if (balance > 1 && data > currentNode->left->data) {
+        currentNode->left = leftRotate(currentNode->left);
+        return rightRotate(currentNode);
+    }
+
+    //Data inserted is less than parent right node data, and right node height is more than 1
+    if (balance < -1 && data < currentNode->right->data) {
+        currentNode->right = rightRotate(currentNode->right);
+        return leftRotate(currentNode);
+    }
+
+    //If node is balanced, no need balance
+    return currentNode;
+
+
+}
+
 int main(void) {
     printf("Hello, World!\n");
     return 0;
