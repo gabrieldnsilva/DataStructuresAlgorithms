@@ -284,6 +284,41 @@ int menu() {
 }
 
 int main(void) {
-    printf("Hello, World!\n");
+
+    node *root;
+    int data;
+
+    root = NULL;
+
+    while(1) {
+        int option = menu();
+        switch (option) {
+            case 1:
+                printf("\nINSERT: ");
+                scanf("%d", &data);
+                root = insert(root, data);
+                break;
+            case 2:
+                if (empty(root) == 0) {
+                    printf("\nREMOVE: ");
+                    scanf("%d", &data);
+                    root = delete(root, data);
+                }
+                break;
+            case 3:
+                if(empty(root) == 0) {
+                    print(root, 1);
+                }
+                break;
+            case 4:
+                clear(root);
+                root == NULL;
+                break;
+            case 5:
+                clear(root);
+                exit(0);
+                break;
+        }
+    }
     return 0;
 }
