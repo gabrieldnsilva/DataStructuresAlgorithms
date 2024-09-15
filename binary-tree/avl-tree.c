@@ -251,8 +251,10 @@ node *balanceAfterInsert(node * currentNode, int data, int balance) {
 
         if(currentNode != NULL) {
 
+            //1. Print the current node and all its children from left to right
             printf("\n LEVEL: %d - %d", level, currentNode->data);
 
+            //2. All children recieves its parents level + 1, represents his depht level on the tree
             print(currentNode->left, level + 1);
             print(currentNode->right, level + 1);
         }
@@ -260,8 +262,26 @@ node *balanceAfterInsert(node * currentNode, int data, int balance) {
         return;
 }
 
+int menu() {
 
+    int option = 0;
 
+    do {
+        printf("=====================================\n");
+        printf("|               MENU                |\n");
+        printf("=====================================\n");
+        printf("| 1 - Insert                        |\n");
+        printf("| 2 - Remove                        |\n");
+        printf("| 3 - Print Elements                |\n");
+        printf("| 4 - Clear List                    |\n");
+        printf("| 5 - Exit                          |\n");
+        printf("=====================================\n");
+        printf("Escolha sua opção: ");
+        scanf("%d", &option);
+    }while (option < 1 || option > 5);
+    getchar();
+    return option;
+}
 
 int main(void) {
     printf("Hello, World!\n");
