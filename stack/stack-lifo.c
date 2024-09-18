@@ -17,10 +17,10 @@ struct stack {
 typedef struct stack stack;
 
 void reset(stack *stack) {
-    stack->bottom == NULL;
-    stack->top == NULL;
-    stack->dataList == NULL;
-    stack->limit == 0;
+    stack->bottom = NULL;
+    stack->top = NULL;
+    stack->dataList = NULL;
+    stack->limit = 0;
 }
 
 void clear(stack *stack) {
@@ -59,14 +59,16 @@ void push(stack *stack, Data *includeData) {
 void list(stack *stack) {
     int cont = 0;
     for(; cont < stack->limit; cont++) {
-        printf("\n Data[%d] = %d", cont + 1, stack->dataList[cont]);
+        printf("\n Data[%d] = %d", cont + 1, stack->dataList[cont].data);
+
     }
 }
 
 void pop(stack *stack, Data *popData) {
-    if (empty(stack) == 1)
-        popData->data = NULL;
+    if (empty(stack)) {
+        popData->data = -1;
         return;
+    }
 
     popData = stack->top;
     stack->limit--;
@@ -79,13 +81,18 @@ void pop(stack *stack, Data *popData) {
 
     stack->top = &stack->dataList[stack->limit - 1];
     stack->bottom = stack->dataList;
-    stack->dataList = realloc(stack->dataList, sizeof(Data) * stack->limit);
+    Data *temp = realloc(stack->dataList, sizeof(Data) * stack->limit);
+    if (temp != NULL) {
+        stack->dataList = temp;
+    }else {
+
+    }
 
     return;
 }
 
-stack *iniialize() {
-    stack *stack;
+stack *initialize() {
+    stack *stack = malloc(sizeof(struct stack));
     reset(stack);
     stack->dataList = malloc(sizeof(Data) * stack->limit);
     return stack;
@@ -112,7 +119,7 @@ int menu() {
 }
 
 int main() {
-    stack *stack = iniialize();
+    stack *stack = initialize();
     int option = 0;
     Data *dataToManipulate = malloc(sizeof(Data));
 
@@ -126,8 +133,9 @@ int main() {
                 break;
             case 2:
                 pop(stack, dataToManipulate);
-                if(dataToManipulate->data != NULL) {
-                    printf("Value removed: &d \n",dataToManipulate->data);
+                if(dataToManipulate->data != -1) {
+                    printf("Value removed: %d \n", dataToManipulate->data);
+
                 }else {
                     printf("WARN: Empty list");
                 }
