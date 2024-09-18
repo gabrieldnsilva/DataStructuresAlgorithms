@@ -67,6 +67,12 @@ build CMakeFiles/EstruturasDados.dir/stack/stack-lifo.c.obj: C_COMPILER__Estrutu
   OBJECT_DIR = CMakeFiles\EstruturasDados.dir
   OBJECT_FILE_DIR = CMakeFiles\EstruturasDados.dir\stack
 
+build CMakeFiles/EstruturasDados.dir/inserctionSort/inserction-sort.c.obj: C_COMPILER__EstruturasDados_unscanned_Debug C$:/Users/Admin/CLionProjects/Pessoais/EstruturasDados/inserctionSort/inserction-sort.c || cmake_object_order_depends_target_EstruturasDados
+  DEP_FILE = CMakeFiles\EstruturasDados.dir\inserctionSort\inserction-sort.c.obj.d
+  FLAGS = -g -std=gnu11 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\EstruturasDados.dir
+  OBJECT_FILE_DIR = CMakeFiles\EstruturasDados.dir\inserctionSort
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target EstruturasDados
@@ -75,7 +81,7 @@ build CMakeFiles/EstruturasDados.dir/stack/stack-lifo.c.obj: C_COMPILER__Estrutu
 #############################################
 # Link the executable EstruturasDados.exe
 
-build EstruturasDados.exe: C_EXECUTABLE_LINKER__EstruturasDados_Debug CMakeFiles/EstruturasDados.dir/binary-tree/avl-tree.c.obj CMakeFiles/EstruturasDados.dir/quicksort/quick-sort.c.obj CMakeFiles/EstruturasDados.dir/stack/stack-lifo.c.obj
+build EstruturasDados.exe: C_EXECUTABLE_LINKER__EstruturasDados_Debug CMakeFiles/EstruturasDados.dir/binary-tree/avl-tree.c.obj CMakeFiles/EstruturasDados.dir/quicksort/quick-sort.c.obj CMakeFiles/EstruturasDados.dir/stack/stack-lifo.c.obj CMakeFiles/EstruturasDados.dir/inserctionSort/inserction-sort.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\EstruturasDados.dir
