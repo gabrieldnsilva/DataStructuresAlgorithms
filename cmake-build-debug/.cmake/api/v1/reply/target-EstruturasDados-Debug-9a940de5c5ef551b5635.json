@@ -55,7 +55,8 @@
 				0,
 				1,
 				2,
-				3
+				3,
+				4
 			]
 		}
 	],
@@ -95,7 +96,8 @@
 				0,
 				1,
 				2,
-				3
+				3,
+				4
 			]
 		}
 	],
@@ -104,13 +106,13 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "binary-tree/avl-tree.c",
+			"path" : "binaryTree/avl-tree.c",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "quicksort/quick-sort.c",
+			"path" : "quicksSort/quick-sort.c",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -122,7 +124,13 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "inserctionSort/inserction-sort.c",
+			"path" : "insertionSort/insertion-sort.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "linkedList/simpleLinkedList.c",
 			"sourceGroupIndex" : 0
 		}
 	],
