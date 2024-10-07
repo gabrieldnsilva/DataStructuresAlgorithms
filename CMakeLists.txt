@@ -8,4 +8,5 @@ add_executable(EstruturasDados
         quicksSort/quick-sort.c
         stack/stack-lifo.c
         insertionSort/insertion-sort.c
-        linkedList/simpleLinkedList.c)
+        linkedList/simpleLinkedList.c
+        linkedList/doubleLinkedList.c)

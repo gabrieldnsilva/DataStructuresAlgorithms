@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct info {
     int data;
@@ -8,40 +9,66 @@ struct info {
 typedef struct info info;
 
 struct node {
+
     info data;
     struct node *next;
+    struct node *prev;
+
 };
 
 typedef struct node node;
 
 struct linkedList {
+
     node *head;
+    node *tail;
+    unsigned int size;
+
 };
 
 typedef struct linkedList linkedList;
 
 linkedList *reset() {
-    linkedList *list = (linkedList *)malloc(sizeof(linkedList));
+    linkedList *list = (linkedList*)malloc(sizeof(linkedList));
 
-    //Starts with NULL -> indicating the list is empty
     list->head = NULL;
+    list->tail = NULL;
+    list->size = 0;
 
     return list;
 }
 
 void push(linkedList *list, int data) {
 
-    //  Dinamically allocate space for new node
+    node *head = list->head;
     node *newNode = (node *)malloc(sizeof(node));
 
-    //  Put data inside new node
     newNode->data.data = data;
+    newNode->prev = NULL;
 
-    //  Make next of new node as head
-    newNode->next = list->head;
+    if (head == NULL) {
 
-    //  Move the head to point to the new node
-    list->head = newNode;
+        list->head = newNode;
+        list->tail = newNode;
+        newNode->next = NULL;
+
+    } else {
+
+        head->prev = newNode;
+        newNode->next = head;
+        list->head = newNode;
+
+    }
+
+    list->size++;
+}
+void printList(linkedList *list) {
+    node *current = list->head;
+    printf("\n----- LIST -----\n");
+    while (current != NULL) {
+        printf(" %d ", current->data.data);
+        current = current->next;
+    }
 }
 
 int empty(linkedList *list) {
@@ -59,11 +86,25 @@ int pop(linkedList *list) {
 
     node *current = list->head;
 
-    list->head = current->next;
+    if (list->size == 1) {
+        //3. Removes the only node of the list
+        list->head = NULL;
+        list->tail = NULL;
 
+    }else {
+        // Removes the first element
+        list->head = current->next;
+        list->head->prev = NULL;
+    }
+
+    // Save the current data to return
     data = current->data.data;
 
+    //Free the current node to avoid memory leak
     free(current);
+
+    //decrement list size;
+    list->size--;
 
     return data;
 }
@@ -71,7 +112,8 @@ int pop(linkedList *list) {
 void clear(linkedList *list) {
     node *current = list->head;
 
-    while(current->next != NULL) {
+    while(current != NULL) {
+        //Free all the elements from the list
         node *elementToDelete = current;
         current = elementToDelete->next;
 
@@ -83,31 +125,19 @@ void clear(linkedList *list) {
     free(list);
 }
 
-void printList(linkedList *list) {
-    node *current = list->head;
-
-    printf("\n----\tList----\n");
-    while (current != NULL) {
-
-        printf(" %d ", current->data.data);
-        current = current->next;
-    }
-}
-
 int menu() {
+
     int option = 0;
-
     do {
-            printf("-- MENU:\n");
-            printf("\t 1. PUSH\n");
-            printf("\t 2. POP\n");
-            printf("\t 3. PRINT ELEMENTS\n");
-            printf("\t 4. CLEAR LIST\n");
-            printf("\t 5. EXIT\n");
-            printf("\t -- Select your option: ");
-            scanf("%d", &option);
+        printf("\n -- MENU:\n");
+        printf("\t 1. PUSH\n");
+        printf("\t 2. POP\n");
+        printf("\t 3. PRINT ELEMENTS\n");
+        printf("\t 4. CLEAR LIST\n");
+        printf("\t 5. EXIT\n");
+        printf("\t -- Select your option: ");
+        scanf("%d", &option);
     }while (option < 1 || option > 5);
-
     getchar();
     return option;
 }
@@ -116,14 +146,14 @@ int main() {
     linkedList *list;
     int data;
 
-    list = reset();
+    list =  reset();
 
     if (list == NULL) {
-        printf("Memory allocation failure");
+        printf("memory allocation failure");
         exit(-1);
     }
 
-    while (1) {
+    while(1) {
         int option = menu();
         switch (option) {
             case 1:
@@ -132,9 +162,9 @@ int main() {
                 push(list, data);
                 break;
             case 2:
-                if (empty(list) == 0) {
+                if(empty(list) == 0) {
                     data = pop(list);
-                    printf("\n REMOVED: %d\n", data);
+                    printf("\nRemoved data: %d\n", data);
                 }else {
                     printf("Empty List");
                 }
